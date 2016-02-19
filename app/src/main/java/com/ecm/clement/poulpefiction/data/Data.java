@@ -1,4 +1,9 @@
-package com.ecm.clement.poulpefiction;
+package com.ecm.clement.poulpefiction.data;
+
+import com.ecm.clement.poulpefiction.models.Events;
+import com.ecm.clement.poulpefiction.models.FilmSeance;
+import com.ecm.clement.poulpefiction.models.Prochainement;
+import com.ecm.clement.poulpefiction.models.Seance;
 
 public class Data {
     private Events[] events;

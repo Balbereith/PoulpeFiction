@@ -1,4 +1,6 @@
-package com.ecm.clement.poulpefiction;
+package com.ecm.clement.poulpefiction.models;
+
+import com.ecm.clement.poulpefiction.models.FilmSeance;
 
 public class Prochainement {
     private String current;

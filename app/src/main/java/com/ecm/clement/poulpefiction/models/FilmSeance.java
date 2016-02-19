@@ -1,4 +1,4 @@
-package com.ecm.clement.poulpefiction;
+package com.ecm.clement.poulpefiction.models;
 
 public class FilmSeance {
 
