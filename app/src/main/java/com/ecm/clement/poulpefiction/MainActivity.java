@@ -13,6 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +31,82 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        JsonObjectRequest requestEvents = new JsonObjectRequest("http://centrale.corellis.eu/events.json", null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                       // mTextView.setText(response.toString());
+                    }
+                },
+
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Pas de connexion !",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        JsonObjectRequest requestFilms = new JsonObjectRequest("http://centrale.corellis.eu/filmseances.json", null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                    }
+                },
+
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Pas de connexion !",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        JsonObjectRequest requestProchainnements = new JsonObjectRequest("http://centrale.corellis.eu/prochainement.json", null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                    }
+                },
+
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Pas de connexion !",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        JsonObjectRequest requestSeances = new JsonObjectRequest("http://centrale.corellis.eu/seances.json", null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                    }
+                },
+
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Pas de connexion !",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        VolleyApplication.getInstance().getRequestQueue().add(requestEvents);
+        VolleyApplication.getInstance().getRequestQueue().add(requestFilms);
+        VolleyApplication.getInstance().getRequestQueue().add(requestProchainnements);
+        VolleyApplication.getInstance().getRequestQueue().add(requestSeances);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
