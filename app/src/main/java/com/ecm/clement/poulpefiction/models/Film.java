@@ -1,6 +1,8 @@
 package com.ecm.clement.poulpefiction.models;
 
-public class FilmSeance {
+import java.util.List;
+
+public class Film {
 
     private int id;
     private String titre;
@@ -12,7 +14,7 @@ public class FilmSeance {
     private String participants;
     private String realisateur;
     private String Synopsis;
-    private String annee;
+    private int annee;
     private String date_sortie;
     private String info;
     private boolean is_visible;
@@ -25,20 +27,22 @@ public class FilmSeance {
     private String pays;
     private String share_url;
     private String[] medias;
-    private String[] videos;
+    private List<Video> videos;
     private boolean is_avp;
     private boolean is_alaune;
     private boolean is_lastWeek;
+    private boolean is_prochainement;
+    private boolean is_affiche;
 
     //Constructors
-    public FilmSeance(int id, String titre, String titre_vo, String affiche, String web, 
-                      String duree, String distributeur, String participants, 
-                      String realisateur, String synopsis, String annee, 
-                      String date_sortie, String info, boolean is_visible, 
-                      boolean is_vente, int genreid, int categorieid, String genre, 
-                      String categorie, String releaseNumber, String pays, String share_url, 
-                      String[] medias, String[] videos, boolean is_avp, boolean is_alaune, 
-                      boolean is_lastWeek) {
+    public Film(int id, String titre, String titre_vo, String affiche, String web,
+                String duree, String distributeur, String participants,
+                String realisateur, String synopsis, int annee,
+                String date_sortie, String info, boolean is_visible,
+                boolean is_vente, int genreid, int categorieid, String genre,
+                String categorie, String releaseNumber, String pays, String share_url,
+                String medias, List<Video> videos, boolean is_avp, boolean is_alaune,
+                boolean is_lastWeek, boolean is_prochainement, boolean is_affiche) {
         this.id = id;
         this.titre = titre;
         this.titre_vo = titre_vo;
@@ -61,11 +65,13 @@ public class FilmSeance {
         this.releaseNumber = releaseNumber;
         this.pays = pays;
         this.share_url = share_url;
-        this.medias = medias;
+        this.medias = medias.split("'path':");
         this.videos = videos;
         this.is_avp = is_avp;
         this.is_alaune = is_alaune;
         this.is_lastWeek = is_lastWeek;
+        this.is_prochainement = is_prochainement;
+        this.is_affiche = is_affiche;
     }
     
     //Get and set
@@ -150,11 +156,11 @@ public class FilmSeance {
         Synopsis = synopsis;
     }
 
-    public String getAnnee() {
+    public int getAnnee() {
         return annee;
     }
 
-    public void setAnnee(String annee) {
+    public void setAnnee(int annee) {
         this.annee = annee;
     }
 
@@ -254,11 +260,11 @@ public class FilmSeance {
         this.medias = medias;
     }
 
-    public String[] getVideos() {
+    public List<Video> getVideos() {
         return videos;
     }
 
-    public void setVideos(String[] videos) {
+    public void setVideos(List<Video> videos) {
         this.videos = videos;
     }
 
@@ -285,4 +291,21 @@ public class FilmSeance {
     public void setIs_lastWeek(boolean is_lastWeek) {
         this.is_lastWeek = is_lastWeek;
     }
+
+    public boolean is_prochainement() {
+        return is_prochainement;
+    }
+
+    public void setIs_prochainement(boolean is_prochainement) {
+        this.is_prochainement = is_prochainement;
+    }
+
+    public boolean is_affiche() {
+        return is_affiche;
+    }
+
+    public void setIs_affiche(boolean is_affiche) {
+        this.is_affiche = is_affiche;
+    }
 }
+

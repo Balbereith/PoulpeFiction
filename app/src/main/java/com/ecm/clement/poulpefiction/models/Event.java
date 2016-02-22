@@ -1,5 +1,7 @@
 package com.ecm.clement.poulpefiction.models;
 
+import java.util.List;
+
 public class Event {
     private int id;
     private String titre;
@@ -14,14 +16,16 @@ public class Event {
     private String contact;
     private String web_label;
     private String evenementtpeid;
-    private FilmSeance[] films;
+    private List<Film> films;
+    private String type;
+    private String titre_event;
 
     //Constructors
 
     public Event(int id, String titre, String soustitre, String affiche,
                  String description, String vad_condition, String partenaires,
                  String date_deb, String date_fin, String heure, String contact,
-                 String web_label, String evenementtpeid, FilmSeance[] films) {
+                 String web_label, String evenementtpeid, List<Film> films, String type, String titre_event) {
         this.id = id;
         this.titre = titre;
         this.soustitre = soustitre;
@@ -36,6 +40,8 @@ public class Event {
         this.web_label = web_label;
         this.evenementtpeid = evenementtpeid;
         this.films = films;
+        this.type = type;
+        this.titre_event = titre_event;
     }
 
     //Get and Set
@@ -144,11 +150,27 @@ public class Event {
         this.evenementtpeid = evenementtpeid;
     }
 
-    public FilmSeance[] getFilms() {
+    public List<Film> getFilms() {
         return films;
     }
 
-    public void setFilms(FilmSeance[] films) {
+    public void setFilms(List<Film> films) {
         this.films = films;
+    }
+
+    public String getTitre_event() {
+        return titre_event;
+    }
+
+    public void setTitre_event(String titre_event) {
+        this.titre_event = titre_event;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
