@@ -173,4 +173,15 @@ public class Event {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getStringFilms(){
+        String films="";
+        if(this.getFilms() != null) {
+            for (int i = 0; i < this.getFilms().size(); i++) {
+                films =films+String.valueOf(this.getFilms().get(i).getId())+ ",";
+            }
+            films=films.substring(0,films.length()-1);
+        }
+        return films;
+    }
 }

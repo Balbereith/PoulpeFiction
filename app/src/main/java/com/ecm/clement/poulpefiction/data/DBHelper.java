@@ -139,7 +139,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertEvent(String id, String titre, String soustitre, String affiche, String description, String vad_condition, String partenaire, String date_deb, String date_fin,
+    public void insertEvent(int id, String titre, String soustitre, String affiche, String description, String vad_condition, String partenaire, String date_deb, String date_fin,
                             String heure, String contact, String web_label, String evenementtypeid, String films, String type_wrapped, String titre_wrapped){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -162,7 +162,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(EVENT_TABLE_NAME,null,contentValues);
     }
 
-    public void insertFilm (int id, String titre, String titre_ori, String affiche, String web, int duree, String distributeur, String participants, String realisateur, String synopsis, int annee,
+    public void insertFilm (int id, String titre, String titre_ori, String affiche, String web, String duree, String distributeur, String participants, String realisateur, String synopsis, int annee,
                             String date_sortie, String info, boolean is_visible, boolean is_vente, int genreid, int categorieid, String genre, String categorie, String ReleaseNumber, String pays, String share_url,
                             String medias, String videos, boolean is_avp, boolean is_alaune, boolean is_lastWeek, boolean is_prochainement, boolean is_alafiche){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -200,7 +200,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertSeance(int id, String actual_date, String show_time, boolean is_troisd, boolean is_malentendant, boolean is_handicape, String nationality, int cinemaid,
-                             int filmid, String titre, int categorieid, int performanceid, String cinema_salle){
+                             int filmid, String titre, int categorieid, String performanceid, String cinema_salle){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(SEANCE_COLUMN_ID,id);

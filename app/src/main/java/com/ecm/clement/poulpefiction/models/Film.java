@@ -180,7 +180,7 @@ public class Film {
         this.info = info;
     }
 
-    public boolean is_visible() {
+    public boolean getIs_visible() {
         return is_visible;
     }
 
@@ -188,7 +188,7 @@ public class Film {
         this.is_visible = is_visible;
     }
 
-    public boolean is_vente() {
+    public boolean getIs_vente() {
         return is_vente;
     }
 
