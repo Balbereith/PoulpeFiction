@@ -52,7 +52,7 @@ public class Film {
         this.distributeur = distributeur;
         this.participants = participants;
         this.realisateur = realisateur;
-        Synopsis = synopsis;
+        this.Synopsis = synopsis;
         this.annee = annee;
         this.date_sortie = date_sortie;
         this.info = info;

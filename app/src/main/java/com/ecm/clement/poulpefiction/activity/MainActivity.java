@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -35,21 +34,22 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
     private DBHelper poulpePowerBDD;
 
     private static String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog progress;
-    private boolean prochainementsRequestDone= false;
-    private boolean eventsRequestDone= false;
-    private boolean filmSeancesRequestDone= false;
-    private boolean seancesRequestDone= false;
+    private boolean prochainementsRequestDone = false;
+    private boolean eventsRequestDone = false;
+    private boolean filmSeancesRequestDone = false;
+    private boolean seancesRequestDone = false;
 
     private String eventURL = "http://centrale.corellis.eu/events.json";
     private String filmSeanceURL = "http://centrale.corellis.eu/filmseances.json";
@@ -76,26 +76,24 @@ public class MainActivity extends AppCompatActivity
 
         requestQueue = Volley.newRequestQueue(this);
 
-        if(!is_UTD()){
-            if(isOnline()) {
+        if (!is_UTD()) {
+            if (isOnline()) {
                 prochainementRequest();
                 seancesRequest();
                 filmSeancesRequest();
                 eventRequest();
-            }
-            else noConnectionMessage();
-        }
-        else showNavigationActivity();
+            } else noConnectionMessage();
+        } else showNavigationActivity();
     }
 
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        //        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //drawer.setDrawerListener(toggle);
-        //toggle.syncState();
+    //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+    //        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    //drawer.setDrawerListener(toggle);
+    //toggle.syncState();
 
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
+    //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+    //navigationView.setNavigationItemSelectedListener(this);
     //}
 
     @Override
@@ -118,36 +116,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-    if (id == R.id.nav_alAffiche) {
-            Intent monIntent = new Intent(MainActivity.this,AlafficheActivity.class);
-            startActivity(monIntent);
-
-        } else if (id == R.id.nav_prochainement) {
-            Intent monIntent = new Intent(MainActivity.this,ProchainnementActivity.class);
-            startActivity(monIntent);
-
-        } else if (id == R.id.nav_evennements) {
-            Intent monIntent = new Intent(MainActivity.this,EventActivity.class);
-            startActivity(monIntent);
-
-        } else if (id == R.id.nav_preferences) {
-            Intent monIntent = new Intent(MainActivity.this,SettingsActivity.class);
-            startActivity(monIntent);
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    private void addFilmToSQL(Film film, boolean is_Prochainement, boolean is_alafiche){
+    private void addFilmToSQL(Film film, boolean is_Prochainement, boolean is_alafiche) {
         Gson gson = new Gson();
         String media = gson.toJson(film.getMedias());
         String video = gson.toJson(film.getVideos());
@@ -157,11 +126,12 @@ public class MainActivity extends AppCompatActivity
                 film.getInfo(), film.getIs_visible(), film.getIs_vente(), film.getGenreid(),
                 film.getCategorieid(), film.getGenre(), film.getCategorie(), film.getReleaseNumber(),
                 film.getPays(), film.getShare_url(), media, video,
-                film.is_avp(), film.is_alaune(), film.is_lastWeek(), is_Prochainement, is_alafiche);}
+                film.is_avp(), film.is_alaune(), film.is_lastWeek(), is_Prochainement, is_alafiche);
+    }
 
-    private void addEventToSQL(Event event, String titre_wrapped, String type_wrapped){
-        String films= event.getStringFilms();
-        for(int i = 0;i<event.getFilms().size();i++){
+    private void addEventToSQL(Event event, String titre_wrapped, String type_wrapped) {
+        String films = event.getStringFilms();
+        for (int i = 0; i < event.getFilms().size(); i++) {
             addFilmToSQL(event.getFilms().get(i), false, false);
         }
         poulpePowerBDD.insertEvent(event.getId(), event.getTitre(), event.getSoustitre(),
@@ -179,13 +149,13 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void showNavigationActivity(){
+    private void showNavigationActivity() {
         hideProgress();
-        Intent intent = new Intent(this,MainNavigationActivity.class);
+        Intent intent = new Intent(this, MainNavigationActivity.class);
         startActivity(intent);
     }
 
-    private void noConnectionMessage(){
+    private void noConnectionMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("No internet connection.")
                 .setCancelable(false)
@@ -208,7 +178,7 @@ public class MainActivity extends AppCompatActivity
             progress.dismiss();
     }
 
-    private Boolean RequestsDone(){
+    private Boolean RequestsDone() {
         return (prochainementsRequestDone && eventsRequestDone && filmSeancesRequestDone && seancesRequestDone);
     }
 
@@ -220,6 +190,11 @@ public class MainActivity extends AppCompatActivity
             public void onResponse(final JSONArray response) {
                 new Thread(new Runnable() {
                     public void run() {
+                        try {
+                            JSONObject responseSingle = response.getJSONObject(0);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         Gson gson = new Gson();
                         FilmList listFilmProchainement = gson.fromJson(response.toString(), FilmList.class);
                         if (listFilmProchainement != null) {
@@ -325,19 +300,17 @@ public class MainActivity extends AppCompatActivity
                         Gson gson = new Gson();
                         JsonParser parser = new JsonParser();
                         JsonArray jArray = parser.parse(response.toString()).getAsJsonArray();
-                        for(JsonElement obj : jArray )
-                        {
-                            EventList eventWrapped = gson.fromJson( obj , EventList.class);
-                            if(eventWrapped.getEvents() != null){
-                                for(int i = 0; i< eventWrapped.getEvents().size(); i++)
-                                {
-                                    Event event= eventWrapped.getEvents().get(i);
-                                    addEventToSQL(event, eventWrapped.getTitre(),eventWrapped.getType());
+                        for (JsonElement obj : jArray) {
+                            EventList eventWrapped = gson.fromJson(obj, EventList.class);
+                            if (eventWrapped.getEvents() != null) {
+                                for (int i = 0; i < eventWrapped.getEvents().size(); i++) {
+                                    Event event = eventWrapped.getEvents().get(i);
+                                    addEventToSQL(event, eventWrapped.getTitre(), eventWrapped.getType());
                                 }
                             }
                         }
-                        eventsRequestDone=true;
-                        if(RequestsDone()) showNavigationActivity();
+                        eventsRequestDone = true;
+                        if (RequestsDone()) showNavigationActivity();
                     }
                 }).start();
             }
@@ -362,14 +335,14 @@ public class MainActivity extends AppCompatActivity
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    private boolean is_UTD(){
-        boolean dbUpToDate = false;
+    private boolean is_UTD() {
+        boolean UTD = false;
         String destPath = "/data/data/" + getPackageName()
                 + "/databases/" + DBHelper.DATABASE_NAME;
         File f = new File(destPath);
-        if (f.exists()){
-            dbUpToDate = poulpePowerBDD.numberOfRowsInFIlms() > 1 ;
-    }
-        return dbUpToDate;
+        if (f.exists()) {
+            UTD = poulpePowerBDD.numberOfRowsInFIlms() > 1;
+        }
+        return UTD;
     }
 }
