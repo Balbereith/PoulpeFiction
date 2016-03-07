@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.ecm.clement.poulpefiction.models.Event;
 import com.ecm.clement.poulpefiction.models.Film;
+import com.ecm.clement.poulpefiction.models.Media;
 import com.ecm.clement.poulpefiction.models.Video;
 
 import java.util.ArrayList;
@@ -162,7 +163,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(EVENT_TABLE_NAME,null,contentValues);
     }
 
-    public void insertFilm (int id, String titre, String titre_ori, String affiche, String web, String duree, String distributeur, String participants, String realisateur, String synopsis, int annee,
+    public void insertFilm (int id, String titre, String titre_ori, String affiche, String web, int duree, String distributeur, String participants, String realisateur, String synopsis, int annee,
                             String date_sortie, String info, boolean is_visible, boolean is_vente, int genreid, int categorieid, String genre, String categorie, String ReleaseNumber, String pays, String share_url,
                             String medias, String videos, boolean is_avp, boolean is_alaune, boolean is_lastWeek, boolean is_prochainement, boolean is_alafiche){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -326,7 +327,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     res.getString(res.getColumnIndex(FILM_COLUMN_TITLEVO)),
                     res.getString(res.getColumnIndex(FILM_COLUMN_POSTER)),
                     res.getString(res.getColumnIndex(FILM_COLUMN_WEB)),
-                    res.getString(res.getColumnIndex(FILM_COLUMN_LENGTH)),
+                    res.getInt(res.getColumnIndex(FILM_COLUMN_LENGTH)),
                     res.getString(res.getColumnIndex(FILM_COLUMN_DISTRIBUTOR)),
                     res.getString(res.getColumnIndex(FILM_COLUMN_PARTICIPANT)),
                     res.getString(res.getColumnIndex(FILM_COLUMN_DIRECTOR)),
@@ -343,7 +344,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     res.getString(res.getColumnIndex(FILM_COLUMN_RELEASENUMBER)),
                     res.getString(res.getColumnIndex(FILM_COLUMN_COUNTRY)),
                     res.getString(res.getColumnIndex(FILM_COLUMN_SHAREURL)),
-                    res.getString(res.getColumnIndex(FILM_COLUMN_MEDIASLIST)),
+                    stringToMedia(res.getString(res.getColumnIndex(FILM_COLUMN_MEDIASLIST))),
                     stringToVideos(res.getString(res.getColumnIndex(EVENT_COLUMN_FILMSLIST))),
                     res.getInt(res.getColumnIndex(FILM_COLUMN_AVP))==1,
                     res.getInt(res.getColumnIndex(FILM_COLUMN_ALAUNE))==1,
@@ -449,5 +450,17 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         Log.d(TAG,listCategorie.toString() );
         return listCategorie;
+    }
+
+    public List<Media> stringToMedia(String paths){
+        ArrayList<Media> listMedias = new ArrayList<Media>();
+        if(paths.length()>0) {
+            List<String> pathList = Arrays.asList(paths.split(","));
+
+            for (int i = 0; i < pathList.size(); i++) {
+                listMedias.add(new Media(pathList.get(i)));
+            }
+        }
+        return listMedias;
     }
 }

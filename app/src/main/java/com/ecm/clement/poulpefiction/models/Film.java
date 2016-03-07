@@ -4,44 +4,44 @@ import java.util.List;
 
 public class Film {
 
-    private int id;
-    private String titre;
-    private String titre_vo;
-    private String affiche;
-    private String web;
-    private String duree;
-    private String distributeur;
-    private String participants;
-    private String realisateur;
-    private String Synopsis;
-    private int annee;
-    private String date_sortie;
-    private String info;
-    private boolean is_visible;
-    private boolean is_vente;
-    private int genreid;
-    private int categorieid;
-    private String genre;
-    private String categorie;
-    private String releaseNumber;
-    private String pays;
-    private String share_url;
-    private String[] medias;
-    private List<Video> videos;
-    private boolean is_avp;
-    private boolean is_alaune;
-    private boolean is_lastWeek;
-    private boolean is_prochainement;
-    private boolean is_affiche;
+    private int id = 0;
+    private String titre = null;
+    private String titre_vo = null;
+    private String affiche = null;
+    private String web = null;
+    private int duree = 0;
+    private String distributeur = null;
+    private String participants = null;
+    private String realisateur = null;
+    private String synopsis = null;
+    private int annee = 0;
+    private String date_sortie = null;
+    private String info = null;
+    private Boolean is_visible = false;
+    private Boolean is_vente = false;
+    private int genreid = 0;
+    private int categorieid = 0;
+    private String genre = null;
+    private String categorie = null;
+    private String releaseNumber = null;
+    private String pays = null;
+    private String share_url = null;
+    private List<Media> medias = null;
+    private List<Video> videos = null;
+    private Boolean is_avp = false;
+    private Boolean is_alaune = false;
+    private Boolean is_lastWeek = false;
+    private Boolean is_prochainement=false;
+    private Boolean is_affiche;
 
     //Constructors
     public Film(int id, String titre, String titre_vo, String affiche, String web,
-                String duree, String distributeur, String participants,
+                int duree, String distributeur, String participants,
                 String realisateur, String synopsis, int annee,
                 String date_sortie, String info, boolean is_visible,
                 boolean is_vente, int genreid, int categorieid, String genre,
                 String categorie, String releaseNumber, String pays, String share_url,
-                String medias, List<Video> videos, boolean is_avp, boolean is_alaune,
+                List<Media> medias, List<Video> videos, boolean is_avp, boolean is_alaune,
                 boolean is_lastWeek, boolean is_prochainement, boolean is_affiche) {
         this.id = id;
         this.titre = titre;
@@ -52,7 +52,7 @@ public class Film {
         this.distributeur = distributeur;
         this.participants = participants;
         this.realisateur = realisateur;
-        this.Synopsis = synopsis;
+        this.synopsis = synopsis;
         this.annee = annee;
         this.date_sortie = date_sortie;
         this.info = info;
@@ -65,7 +65,7 @@ public class Film {
         this.releaseNumber = releaseNumber;
         this.pays = pays;
         this.share_url = share_url;
-        this.medias = medias.split("'path':");
+        this.medias = medias;
         this.videos = videos;
         this.is_avp = is_avp;
         this.is_alaune = is_alaune;
@@ -116,11 +116,11 @@ public class Film {
         this.web = web;
     }
 
-    public String getDuree() {
+    public int getDuree() {
         return duree;
     }
 
-    public void setDuree(String duree) {
+    public void setDuree(int duree) {
         this.duree = duree;
     }
 
@@ -149,11 +149,11 @@ public class Film {
     }
 
     public String getSynopsis() {
-        return Synopsis;
+        return synopsis;
     }
 
     public void setSynopsis(String synopsis) {
-        Synopsis = synopsis;
+        synopsis = synopsis;
     }
 
     public int getAnnee() {
@@ -252,11 +252,11 @@ public class Film {
         this.share_url = share_url;
     }
 
-    public String[] getMedias() {
+    public List<Media> getMedias() {
         return medias;
     }
 
-    public void setMedias(String[] medias) {
+    public void setMedias(List<Media> medias) {
         this.medias = medias;
     }
 

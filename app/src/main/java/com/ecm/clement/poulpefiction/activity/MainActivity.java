@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
-        if (!is_UTD()) {
-            if (isOnline()) {
+        if (is_UTD()==false) {
+            if (isOnline()==true) {
                 prochainementRequest();
                 seancesRequest();
                 filmSeancesRequest();
@@ -118,16 +118,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void addFilmToSQL(Film film, boolean is_Prochainement, boolean is_alafiche) {
         Gson gson = new Gson();
-        String media = gson.toJson(film.getMedias());
-        String video = gson.toJson(film.getVideos());
-        poulpePowerBDD.insertFilm(film.getId(), film.getTitre(), film.getTitre_vo(), film.getAffiche(),
-                film.getWeb(), film.getDuree(), film.getDistributeur(), film.getParticipants(),
-                film.getRealisateur(), film.getSynopsis(), film.getAnnee(), film.getDate_sortie(),
-                film.getInfo(), film.getIs_visible(), film.getIs_vente(), film.getGenreid(),
-                film.getCategorieid(), film.getGenre(), film.getCategorie(), film.getReleaseNumber(),
-                film.getPays(), film.getShare_url(), media, video,
-                film.is_avp(), film.is_alaune(), film.is_lastWeek(), is_Prochainement, is_alafiche);
-    }
+        if(!poulpePowerBDD.checkIfFilmIsAlreadyInDb(film.getId())) {
+            String media = gson.toJson(film.getMedias());
+            String video = gson.toJson(film.getVideos());
+            poulpePowerBDD.insertFilm(film.getId(), film.getTitre(), film.getTitre_vo(), film.getAffiche(), film.getWeb(), film.getDuree(), film.getDistributeur(), film.getParticipants(),
+                    film.getRealisateur(), film.getSynopsis(), film.getAnnee(), film.getDate_sortie(), film.getInfo(), film.getIs_visible(), film.getIs_vente(), film.getGenreid(),
+                    film.getCategorieid(), film.getGenre(), film.getCategorie(), film.getReleaseNumber(), film.getPays(), film.getShare_url(), media, video,
+                    film.is_avp(), film.is_alaune(), film.is_lastWeek(), is_Prochainement, is_alafiche);
+        } else {
+            if (is_Prochainement) {
+
+                poulpePowerBDD.updateProchainement(film.getId());
+            } else if (is_alafiche)poulpePowerBDD.updateAlaffiche(film.getId());
+        }
+        }
 
     private void addEventToSQL(Event event, String titre_wrapped, String type_wrapped) {
         String films = event.getStringFilms();
@@ -188,8 +192,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(final JSONArray response) {
-                new Thread(new Runnable() {
-                    public void run() {
                         try {
                             JSONObject responseSingle = response.getJSONObject(0);
                         } catch (JSONException e) {
@@ -206,8 +208,6 @@ public class MainActivity extends AppCompatActivity {
                         prochainementsRequestDone = true;
                         if (RequestsDone()) showNavigationActivity();
                     }
-                }).start();
-            }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -228,8 +228,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(final JSONArray response) {
-                new Thread(new Runnable() {
-                    public void run() {
                         Gson gson = new Gson();
                         JsonParser parser = new JsonParser();
                         JsonArray jArray = parser.parse(response.toString()).getAsJsonArray();
@@ -241,8 +239,6 @@ public class MainActivity extends AppCompatActivity {
                         seancesRequestDone = true;
                         if (RequestsDone()) showNavigationActivity();
                     }
-                }).start();
-            }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -262,8 +258,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(final JSONArray response) {
-                new Thread(new Runnable() {
-                    public void run() {
                         Gson gson = new Gson();
                         JsonParser parser = new JsonParser();
                         JsonArray jArray = parser.parse(response.toString()).getAsJsonArray();
@@ -273,8 +267,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         filmSeancesRequestDone = true;
                         if (RequestsDone()) showNavigationActivity();
-                    }
-                }).start();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -295,8 +287,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(final JSONArray response) {
-                new Thread(new Runnable() {
-                    public void run() {
                         Gson gson = new Gson();
                         JsonParser parser = new JsonParser();
                         JsonArray jArray = parser.parse(response.toString()).getAsJsonArray();
@@ -311,8 +301,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         eventsRequestDone = true;
                         if (RequestsDone()) showNavigationActivity();
-                    }
-                }).start();
             }
         }, new Response.ErrorListener() {
             @Override

@@ -9,6 +9,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import com.ecm.clement.poulpefiction.R;
 
@@ -22,6 +25,38 @@ public class MainNavigationActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Button btnAff = (Button)findViewById(R.id.btnAff);
+        Button btnPro = (Button)findViewById(R.id.btnPro);
+        Button btnEve = (Button)findViewById(R.id.btnEve);
+        Button btnPref = (Button)findViewById(R.id.btnPref);
+        btnAff.setOnClickListener(new  OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent monIntent = new Intent(MainNavigationActivity.this, AlafficheActivity.class);
+                startActivity(monIntent);
+            }
+        });
+        btnPro.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent monIntent = new Intent(MainNavigationActivity.this, ProchainnementActivity.class);
+                startActivity(monIntent);
+            }
+        });
+        btnEve.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent monIntent = new Intent(MainNavigationActivity.this, EventActivity.class);
+                startActivity(monIntent);
+            }
+        });
+        btnPref.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent monIntent = new Intent(MainNavigationActivity.this, SettingsActivity.class);
+                startActivity(monIntent);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
