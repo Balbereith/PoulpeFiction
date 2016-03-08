@@ -15,13 +15,23 @@ import com.ecm.clement.poulpefiction.R;
 public class AlafficheActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_alaffiche);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+            //List<Film> dataList =
+           /** //Création de l'adapter
+            FilmViewAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mStrings);
 
+//Récupération du ListView présent dans notre IHM
+            ListView list = (ListView)findViewById(R.id.ListView01);
+
+//On passe nos données au composant ListView
+            list.setAdapter(adapter);
+**/
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

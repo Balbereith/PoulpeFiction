@@ -241,9 +241,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean checkIfFilmIsAlreadyInDb(int id) {
+    public boolean checkIfFilmIsAlreadyInDb(Film film) {
+        int search = film.getId();
         SQLiteDatabase db = this.getReadableDatabase();
-        String Query = "Select * from " + FILM_TABLE_NAME + " where " + FILM_COLUMN_ID + " = " + id;
+        String Query = "Select * from " + FILM_TABLE_NAME + " where " + FILM_COLUMN_ID + " = " + Integer.toString(search);
         Cursor cursor = db.rawQuery(Query, null);
         if(cursor.getCount() <= 0){
             cursor.close();
@@ -252,6 +253,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return true;
     }
+
 
     public int numberOfRowsInSeances(){
         SQLiteDatabase db = this.getReadableDatabase();

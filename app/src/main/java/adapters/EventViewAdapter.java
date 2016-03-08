@@ -55,7 +55,7 @@ public class EventViewAdapter extends BaseAdapter{
             holder.titre = (TextView) convertView.findViewById(R.id.txtTitre);
             holder.soustitre = (TextView) convertView.findViewById(R.id.txtSoustitre);
             holder.affiche = (ImageView) convertView.findViewById(R.id.imgAffiche);
-            holder.description = (TextView) convertView.findViewById(R.id.txtdescription);
+            /**holder.description = (TextView) convertView.findViewById(R.id.txtdescription);
             holder.partenaires = (TextView) convertView.findViewById(R.id.txtPartenaires);
             holder.date_deb = (TextView) convertView.findViewById(R.id.txtDateDeb);
             holder.date_fin = (TextView) convertView.findViewById(R.id.txtDateFin);
@@ -63,7 +63,7 @@ public class EventViewAdapter extends BaseAdapter{
             holder.contact = (TextView) convertView.findViewById(R.id.txtContact);
             holder.web_label = (TextView) convertView.findViewById(R.id.txtWebLabel);
             holder.type = (TextView) convertView.findViewById(R.id.txtType);
-            holder.titre_event = (TextView) convertView.findViewById(R.id.txtTitreEvent);
+            holder.titre_event = (TextView) convertView.findViewById(R.id.txtTitreEvent);**/
             convertView.setTag(holder);
         } else {
             Log.v("test", "convertView is not null");

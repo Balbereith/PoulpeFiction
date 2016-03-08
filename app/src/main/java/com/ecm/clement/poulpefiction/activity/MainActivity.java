@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -118,20 +119,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void addFilmToSQL(Film film, boolean is_Prochainement, boolean is_alafiche) {
         Gson gson = new Gson();
-        if(!poulpePowerBDD.checkIfFilmIsAlreadyInDb(film.getId())) {
-            String media = gson.toJson(film.getMedias());
-            String video = gson.toJson(film.getVideos());
-            poulpePowerBDD.insertFilm(film.getId(), film.getTitre(), film.getTitre_vo(), film.getAffiche(), film.getWeb(), film.getDuree(), film.getDistributeur(), film.getParticipants(),
-                    film.getRealisateur(), film.getSynopsis(), film.getAnnee(), film.getDate_sortie(), film.getInfo(), film.getIs_visible(), film.getIs_vente(), film.getGenreid(),
-                    film.getCategorieid(), film.getGenre(), film.getCategorie(), film.getReleaseNumber(), film.getPays(), film.getShare_url(), media, video,
-                    film.is_avp(), film.is_alaune(), film.is_lastWeek(), is_Prochainement, is_alafiche);
-        } else {
-            if (is_Prochainement) {
+        try {
+            if (!poulpePowerBDD.checkIfFilmIsAlreadyInDb(film)) {
+                String media = gson.toJson(film.getMedias());
+                String video = gson.toJson(film.getVideos());
+                poulpePowerBDD.insertFilm(film.getId(), film.getTitre(), film.getTitre_vo(), film.getAffiche(), film.getWeb(), film.getDuree(), film.getDistributeur(), film.getParticipants(),
+                        film.getRealisateur(), film.getSynopsis(), film.getAnnee(), film.getDate_sortie(), film.getInfo(), film.getIs_visible(), film.getIs_vente(), film.getGenreid(),
+                        film.getCategorieid(), film.getGenre(), film.getCategorie(), film.getReleaseNumber(), film.getPays(), film.getShare_url(), media, video,
+                        film.is_avp(), film.is_alaune(), film.is_lastWeek(), is_Prochainement, is_alafiche);
+            } else {
+                if (is_Prochainement) {
 
-                poulpePowerBDD.updateProchainement(film.getId());
-            } else if (is_alafiche)poulpePowerBDD.updateAlaffiche(film.getId());
-        }
-        }
+                    poulpePowerBDD.updateProchainement(film.getId());
+                } else if (is_alafiche) poulpePowerBDD.updateAlaffiche(film.getId());
+            }
+        }catch(NullPointerException e){
+            Log.d(TAG, "NullPointer Fucking Exception de ta mère que je sais pas d'où ça vient.");}
+    }
 
     private void addEventToSQL(Event event, String titre_wrapped, String type_wrapped) {
         String films = event.getStringFilms();
