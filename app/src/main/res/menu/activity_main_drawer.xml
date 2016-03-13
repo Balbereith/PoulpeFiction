@@ -14,15 +14,11 @@
             android:id="@+id/nav_evennements"
             android:icon="@drawable/calendar"
             android:title="Evènements" />
-    </group>
 
-    <item android:title="Configurations">
-        <menu>
-            <item
-                android:id="@+id/nav_preferences"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Préférences" />
-        </menu>
-    </item>
+        <item
+            android:id="@+id/nav_preferences"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Préférences" />
+    </group>
 
 </menu>

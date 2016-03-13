@@ -2,6 +2,7 @@ package com.ecm.clement.poulpefiction.models;
 
 public class Seance {
     private int id;
+    private String actual_date;
     private String show_time;
     private boolean is_troisd;
     private boolean is_malentendant;
@@ -11,14 +12,13 @@ public class Seance {
     private int filmid;
     private String titre;
     private int categorieid;
-    private String performancied;
+    private int performanceid;
     private String cinema_salle;
 
-    //Constructors
-    public Seance(int id, String show_time, boolean is_troisd, boolean is_malentendant,
-                  boolean is_handicape, String nationality, int cinemaid, int filmid,
-                  String titre, int categorieid, String performancied, String cinema_salle) {
+    public Seance(int id, String actual_date, String show_time, boolean is_troisd, boolean is_malentendant, boolean is_handicape, String nationality, int cinemaid,
+                  int filmid, String titre, int categorieid, int performanceid, String cinema_salle) {
         this.id = id;
+        this.actual_date = actual_date;
         this.show_time = show_time;
         this.is_troisd = is_troisd;
         this.is_malentendant = is_malentendant;
@@ -28,17 +28,24 @@ public class Seance {
         this.filmid = filmid;
         this.titre = titre;
         this.categorieid = categorieid;
-        this.performancied = performancied;
+        this.performanceid = performanceid;
         this.cinema_salle = cinema_salle;
     }
 
-    // Get and Set
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getActual_date() {
+        return actual_date;
+    }
+
+    public void setActual_date(String actual_date) {
+        this.actual_date = actual_date;
     }
 
     public String getShow_time() {
@@ -49,7 +56,7 @@ public class Seance {
         this.show_time = show_time;
     }
 
-    public boolean is_troisd() {
+    public boolean getIs_troisd() {
         return is_troisd;
     }
 
@@ -57,7 +64,7 @@ public class Seance {
         this.is_troisd = is_troisd;
     }
 
-    public boolean is_malentendant() {
+    public boolean getIs_malentendant() {
         return is_malentendant;
     }
 
@@ -65,7 +72,7 @@ public class Seance {
         this.is_malentendant = is_malentendant;
     }
 
-    public boolean is_handicape() {
+    public boolean getIs_handicape() {
         return is_handicape;
     }
 
@@ -113,12 +120,12 @@ public class Seance {
         this.categorieid = categorieid;
     }
 
-    public String getPerformancied() {
-        return performancied;
+    public int getPerformanceid() {
+        return performanceid;
     }
 
-    public void setPerformancied(String performancied) {
-        this.performancied = performancied;
+    public void setPerformanceid(int performanceid) {
+        this.performanceid = performanceid;
     }
 
     public String getCinema_salle() {
@@ -129,7 +136,22 @@ public class Seance {
         this.cinema_salle = cinema_salle;
     }
 
-
-
-
+    @Override
+    public String   toString() {
+        return "Seance{" +
+                "id=" + id +
+                ", actual_date='" + actual_date + '\'' +
+                ", show_time='" + show_time + '\'' +
+                ", is_troisd=" + is_troisd +
+                ", is_malentendant=" + is_malentendant +
+                ", is_handicape=" + is_handicape +
+                ", nationality='" + nationality + '\'' +
+                ", cinemaid=" + cinemaid +
+                ", filmid=" + filmid +
+                ", titre='" + titre + '\'' +
+                ", categorieid=" + categorieid +
+                ", performanceid=" + performanceid +
+                ", cinema_salle='" + cinema_salle + '\'' +
+                '}';
+    }
 }

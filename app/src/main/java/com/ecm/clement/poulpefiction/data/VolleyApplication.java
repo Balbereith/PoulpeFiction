@@ -8,28 +8,29 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 public class VolleyApplication extends Application {
+
     public static final String TAG = VolleyApplication.class.getSimpleName();
 
-    private RequestQueue mRequestQueue;
+    private RequestQueue requestQueue;
 
-    private static VolleyApplication mInstance;
+    private static VolleyApplication instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance = this;
+        instance = this;
     }
 
     public static synchronized VolleyApplication getInstance() {
-        return mInstance;
+        return instance;
     }
 
     public RequestQueue getRequestQueue() {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
-        return mRequestQueue;
+        return requestQueue;
     }
 
     public <T> void addToRequestQueue(Request<T> req, String tag) {
@@ -43,8 +44,8 @@ public class VolleyApplication extends Application {
     }
 
     public void cancelPendingRequests(Object tag) {
-        if (mRequestQueue != null) {
-            mRequestQueue.cancelAll(tag);
+        if (requestQueue != null) {
+            requestQueue.cancelAll(tag);
         }
     }
 }

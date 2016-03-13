@@ -3,54 +3,62 @@ package com.ecm.clement.poulpefiction.models;
 import java.util.List;
 
 public class Event {
-    private int id;
+    private String id;
     private String titre;
     private String soustitre;
     private String affiche;
     private String description;
     private String vad_condition;
-    private String partenaires;
+    private String partenaire;
     private String date_deb;
     private String date_fin;
     private String heure;
     private String contact;
     private String web_label;
-    private String evenementtpeid;
+    private String evenementtypeid;
     private List<Film> films;
-    private String type;
-    private String titre_event;
+    private String type_wrapped;
+    private String titre_wrapped;
 
-    //Constructors
-
-    public Event(int id, String titre, String soustitre, String affiche,
-                 String description, String vad_condition, String partenaires,
-                 String date_deb, String date_fin, String heure, String contact,
-                 String web_label, String evenementtpeid, List<Film> films, String type, String titre_event) {
+    public Event(String id, String titre, String soustitre, String affiche, String description, String vad_condition, String partenaire, String date_deb, String date_fin,
+                 String heure, String contact, String web_label, String evenementtypeid, List<Film> films) {
         this.id = id;
         this.titre = titre;
         this.soustitre = soustitre;
         this.affiche = affiche;
         this.description = description;
         this.vad_condition = vad_condition;
-        this.partenaires = partenaires;
+        this.partenaire = partenaire;
         this.date_deb = date_deb;
         this.date_fin = date_fin;
         this.heure = heure;
         this.contact = contact;
         this.web_label = web_label;
-        this.evenementtpeid = evenementtpeid;
+        this.evenementtypeid = evenementtypeid;
         this.films = films;
-        this.type = type;
-        this.titre_event = titre_event;
     }
 
-    //Get and Set
+    public String getType_wrapped() {
+        return type_wrapped;
+    }
 
-    public int getId() {
+    public void setType_wrapped(String type_wrapped) {
+        this.type_wrapped = type_wrapped;
+    }
+
+    public String getTitre_wrapped() {
+        return titre_wrapped;
+    }
+
+    public void setTitre_wrapped(String titre_wrapped) {
+        this.titre_wrapped = titre_wrapped;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -94,12 +102,12 @@ public class Event {
         this.vad_condition = vad_condition;
     }
 
-    public String getPartenaires() {
-        return partenaires;
+    public String getPartenaire() {
+        return partenaire;
     }
 
-    public void setPartenaires(String partenaires) {
-        this.partenaires = partenaires;
+    public void setPartenaire(String partenaire) {
+        this.partenaire = partenaire;
     }
 
     public String getDate_deb() {
@@ -142,12 +150,12 @@ public class Event {
         this.web_label = web_label;
     }
 
-    public String getEvenementtpeid() {
-        return evenementtpeid;
+    public String getEvenementtypeid() {
+        return evenementtypeid;
     }
 
-    public void setEvenementtpeid(String evenementtpeid) {
-        this.evenementtpeid = evenementtpeid;
+    public void setEvenementtypeid(String evenementtypeid) {
+        this.evenementtypeid = evenementtypeid;
     }
 
     public List<Film> getFilms() {
@@ -158,23 +166,7 @@ public class Event {
         this.films = films;
     }
 
-    public String getTitre_event() {
-        return titre_event;
-    }
-
-    public void setTitre_event(String titre_event) {
-        this.titre_event = titre_event;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getStringFilms(){
+    public String getFilmsIdAsString(){
         String films="";
         if(this.getFilms() != null) {
             for (int i = 0; i < this.getFilms().size(); i++) {
@@ -183,5 +175,25 @@ public class Event {
             films=films.substring(0,films.length()-1);
         }
         return films;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id='" + id + '\'' +
+                ", titre='" + titre + '\'' +
+                ", soustitre='" + soustitre + '\'' +
+                ", affiche='" + affiche + '\'' +
+                ", description='" + description + '\'' +
+                ", vad_condition='" + vad_condition + '\'' +
+                ", partenaire='" + partenaire + '\'' +
+                ", date_deb='" + date_deb + '\'' +
+                ", date_fin='" + date_fin + '\'' +
+                ", heure='" + heure + '\'' +
+                ", contact='" + contact + '\'' +
+                ", web_label='" + web_label + '\'' +
+                ", evenementtypeid='" + evenementtypeid + '\'' +
+                ", films=" + films +
+                '}';
     }
 }

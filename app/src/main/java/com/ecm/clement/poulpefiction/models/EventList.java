@@ -39,7 +39,7 @@ public class EventList {
 
     @Override
     public String toString() {
-        return "EventList{" +
+        return "EventWrapped{" +
                 "type='" + type + '\'' +
                 ", events=" + events +
                 ", titre='" + titre + '\'' +

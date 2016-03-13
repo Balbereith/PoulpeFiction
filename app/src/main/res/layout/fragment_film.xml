@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:id="@+id/affiche"
+        android:layout_width="75dip"
+        android:layout_height="100dip"
+        android:scaleType="centerCrop"
+        android:src="@drawable/a15c6213" />
+
+    <TextView
+        android:id="@+id/titreFilm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:layout_toRightOf="@id/affiche"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="2dip"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        android:textColor="#030303"
+        android:text="Titre" />
+
+    <TextView
+        android:id="@+id/dateFilm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titreFilm"
+        android:layout_alignStart="@id/titreFilm"
+        android:layout_marginLeft="2dip"
+        android:text="Date" />
+
+    <TextView
+        android:id="@+id/genreFilm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateFilm"
+        android:layout_alignStart="@id/titreFilm"
+        android:layout_marginLeft="2dip"
+        android:text="genre" />
+
+</RelativeLayout>

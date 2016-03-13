@@ -3,10 +3,9 @@ package com.ecm.clement.poulpefiction.models;
 import java.util.List;
 
 public class Film {
-
     private int id = 0;
     private String titre = null;
-    private String titre_vo = null;
+    private String titre_ori = null;
     private String affiche = null;
     private String web = null;
     private int duree = 0;
@@ -23,29 +22,21 @@ public class Film {
     private int categorieid = 0;
     private String genre = null;
     private String categorie = null;
-    private String releaseNumber = null;
+    private String ReleaseNumber = null;
     private String pays = null;
     private String share_url = null;
-    private List<Media> medias = null;
-    private List<Video> videos = null;
+    private List<Medias> medias = null;
+    private List<Videos> videos = null;
     private Boolean is_avp = false;
     private Boolean is_alaune = false;
     private Boolean is_lastWeek = false;
-    private Boolean is_prochainement=false;
-    private Boolean is_affiche;
 
-    //Constructors
-    public Film(int id, String titre, String titre_vo, String affiche, String web,
-                int duree, String distributeur, String participants,
-                String realisateur, String synopsis, int annee,
-                String date_sortie, String info, boolean is_visible,
-                boolean is_vente, int genreid, int categorieid, String genre,
-                String categorie, String releaseNumber, String pays, String share_url,
-                List<Media> medias, List<Video> videos, boolean is_avp, boolean is_alaune,
-                boolean is_lastWeek, boolean is_prochainement, boolean is_affiche) {
+    public Film(int id, String titre, String titre_ori, String affiche, String web, int duree, String distributeur, String participants, String realisateur, String synopsis, int annee,
+                String date_sortie, String info, Boolean is_visible, Boolean is_vente, int genreid, int categorieid, String genre, String categorie, String ReleaseNumber, String pays, String share_url,
+                List<Medias> medias, List<Videos> videos, Boolean is_avp, Boolean is_alaune, Boolean is_lastWeek){
         this.id = id;
         this.titre = titre;
-        this.titre_vo = titre_vo;
+        this.titre_ori = titre_ori;
         this.affiche = affiche;
         this.web = web;
         this.duree = duree;
@@ -62,7 +53,7 @@ public class Film {
         this.categorieid = categorieid;
         this.genre = genre;
         this.categorie = categorie;
-        this.releaseNumber = releaseNumber;
+        this.ReleaseNumber = ReleaseNumber;
         this.pays = pays;
         this.share_url = share_url;
         this.medias = medias;
@@ -70,17 +61,13 @@ public class Film {
         this.is_avp = is_avp;
         this.is_alaune = is_alaune;
         this.is_lastWeek = is_lastWeek;
-        this.is_prochainement = is_prochainement;
-        this.is_affiche = is_affiche;
-    }
-    
-    //Get and set
-
-    public int getId() {
-        return id;
     }
 
-    public void setId(int id) {
+    public int getId(){
+        return this.id;
+    }
+
+    public void setId(int id){
         this.id = id;
     }
 
@@ -92,12 +79,12 @@ public class Film {
         this.titre = titre;
     }
 
-    public String getTitre_vo() {
-        return titre_vo;
+    public String getTitre_ori() {
+        return titre_ori;
     }
 
-    public void setTitre_vo(String titre_vo) {
-        this.titre_vo = titre_vo;
+    public void setTitre_ori(String titre_ori) {
+        this.titre_ori = titre_ori;
     }
 
     public String getAffiche() {
@@ -153,7 +140,7 @@ public class Film {
     }
 
     public void setSynopsis(String synopsis) {
-        synopsis = synopsis;
+        this.synopsis = synopsis;
     }
 
     public int getAnnee() {
@@ -180,19 +167,19 @@ public class Film {
         this.info = info;
     }
 
-    public boolean getIs_visible() {
+    public Boolean getIs_visible() {
         return is_visible;
     }
 
-    public void setIs_visible(boolean is_visible) {
+    public void setIs_visible(Boolean is_visible) {
         this.is_visible = is_visible;
     }
 
-    public boolean getIs_vente() {
+    public Boolean getIs_vente() {
         return is_vente;
     }
 
-    public void setIs_vente(boolean is_vente) {
+    public void setIs_vente(Boolean is_vente) {
         this.is_vente = is_vente;
     }
 
@@ -229,11 +216,11 @@ public class Film {
     }
 
     public String getReleaseNumber() {
-        return releaseNumber;
+        return ReleaseNumber;
     }
 
-    public void setReleaseNumber(String releaseNumber) {
-        this.releaseNumber = releaseNumber;
+    public void setReleaseNumber(String ReleaseNumber) {
+        this.ReleaseNumber = ReleaseNumber;
     }
 
     public String getPays() {
@@ -252,60 +239,151 @@ public class Film {
         this.share_url = share_url;
     }
 
-    public List<Media> getMedias() {
-        return medias;
-    }
-
-    public void setMedias(List<Media> medias) {
-        this.medias = medias;
-    }
-
-    public List<Video> getVideos() {
+    public  List<Videos> getVideos() {
         return videos;
     }
 
-    public void setVideos(List<Video> videos) {
+    public void setVideos( List<Videos> videos) {
         this.videos = videos;
     }
 
-    public boolean is_avp() {
+    public Boolean getIs_avp() {
         return is_avp;
     }
 
-    public void setIs_avp(boolean is_avp) {
+    public void setIs_avp(Boolean is_avp) {
         this.is_avp = is_avp;
     }
 
-    public boolean is_alaune() {
+    public Boolean getIs_alaune() {
         return is_alaune;
     }
 
-    public void setIs_alaune(boolean is_alaune) {
+    public void setIs_alaune(Boolean is_alaune) {
         this.is_alaune = is_alaune;
     }
 
-    public boolean is_lastWeek() {
+    public Boolean getIs_lastWeek() {
         return is_lastWeek;
     }
 
-    public void setIs_lastWeek(boolean is_lastWeek) {
+    public void setIs_lastWeek(Boolean is_lastWeek) {
         this.is_lastWeek = is_lastWeek;
     }
 
-    public boolean is_prochainement() {
-        return is_prochainement;
+    public List<Medias> getMedias() {
+        return medias;
     }
 
-    public void setIs_prochainement(boolean is_prochainement) {
-        this.is_prochainement = is_prochainement;
+    public void setMedias(List<Medias> medias) {
+        this.medias = medias;
     }
 
-    public boolean is_affiche() {
-        return is_affiche;
+    @Override
+    public String toString() {
+        return "Film{" +
+                "id=" + id +
+                ", titre='" + titre + '\'' +
+                ", titre_ori='" + titre_ori + '\'' +
+                ", affiche='" + affiche + '\'' +
+                ", web='" + web + '\'' +
+                ", duree=" + duree +
+                ", distributeur='" + distributeur + '\'' +
+                ", participants='" + participants + '\'' +
+                ", realisateur='" + realisateur + '\'' +
+                ", synopsis='" + synopsis + '\'' +
+                ", annee=" + annee +
+                ", date_sortie='" + date_sortie + '\'' +
+                ", info='" + info + '\'' +
+                ", is_visible=" + is_visible +
+                ", is_vente=" + is_vente +
+                ", genreid=" + genreid +
+                ", categorieid=" + categorieid +
+                ", genre='" + genre + '\'' +
+                ", categorie='" + categorie + '\'' +
+                ", ReleaseNumber='" + ReleaseNumber + '\'' +
+                ", pays='" + pays + '\'' +
+                ", share_url='" + share_url + '\'' +
+                ", medias=" + medias +
+                ", videos=" + videos +
+                ", is_avp=" + is_avp +
+                ", is_alaune=" + is_alaune +
+                ", is_lastWeek=" + is_lastWeek +
+                '}';
     }
 
-    public void setIs_affiche(boolean is_affiche) {
-        this.is_affiche = is_affiche;
+
+    public static class Medias {
+        private String path;
+
+        public Medias(String path) {
+            this.path = path;
+        }
+
+        public String getPath() {
+            if(path.length() > 4) {
+                String pathcut = path.substring(path.indexOf("http"), path.indexOf("640")+3);
+                pathcut = pathcut.replace("\\u0026", "&");
+                pathcut = pathcut.replace("\\u003d", "=");
+                return pathcut;
+            }
+            else return null;
+        }
+
+        public void setPath(String paths) {
+            this.path = paths;
+        }
+
+        @Override
+        public String toString() {
+            return "Medias{" +
+                    "paths=" + path +
+                    '}';
+        }
+    }
+
+    public static class Videos {
+        private String titre;
+        private String type;
+        private String url;
+
+        public Videos(String titre, String type, String url) {
+            this.titre = titre;
+            this.type = type;
+            this.url = url;
+        }
+
+        public String getTitre() {
+            return titre;
+        }
+
+        public void setTitre(String titre) {
+            this.titre = titre;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        @Override
+        public String toString() {
+            return "Videos{" +
+                    "titre='" + titre + '\'' +
+                    ", type=" + type +
+                    ", url='" + url + '\'' +
+                    '}';
+        }
     }
 }
-
